@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ecomm1.Models;
 using MongoDB.Driver;
 
@@ -25,9 +26,11 @@ namespace ecomm1.Repo
             return "data added";
         }
 
-        public IEnumerable<vare> GetAllVare()
+        public async Task<IEnumerable<vare>> GetAllVare()
         {
-            throw new System.NotImplementedException();
+            var collection = _db.GetCollection<vare>("VareCollection");
+            var res = await collection.Find(_client => true).ToListAsync();
+            return res;
         }
 
         public vare GetSpecVare(int vareId)
