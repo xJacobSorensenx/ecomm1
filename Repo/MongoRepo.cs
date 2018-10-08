@@ -14,7 +14,7 @@ namespace ecomm1.Repo
 
         public MongoRepo()
         {
-            _client = new MongoClient("mongo://localhost:27017");
+            _client = new MongoClient("mongodb://localhost:27017");
             _db = _client.GetDatabase("VareDB");
         }
         
