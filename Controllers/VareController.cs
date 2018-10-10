@@ -32,12 +32,24 @@ namespace ecomm1.Controllers
         [HttpPost]
         public IActionResult post([FromBody] vare incData){
             
-            if(!ModelState.IsValid){
-                return BadRequest();
-            }else{
+            if(!ModelState.IsValid) {
+                return BadRequest("Modelstate not valid");
+            } else {
                var res = _ctx.AddVare(incData);
                 return Ok(res);
             }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody] vare vareData, string id){
+            var res = await _ctx.UpdateVare(id, vareData);
+            return Ok(res);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult delete(string id){
+            _ctx.SletVare(id);
+            return Ok("Vare slettet");
         }
     }
 }

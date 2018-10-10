@@ -45,9 +45,18 @@ namespace ecomm1.Repo
             return res;
         }
 
-        public string UpdateVare(vare vareData)
+        public async Task<string> UpdateVare(string vareid, vare vareData)
         {
-            throw new System.NotImplementedException();
+            var collection = _db.GetCollection<vare>(collectionNavn);
+            var filter = Builders<vare>.Filter.Eq(v => v.VareId, vareid);
+            var res =await collection.ReplaceOneAsync(filter, vareData);
+            return "Data opdateret";
+        }
+
+        public string SletVare(string vareid){
+            var collection = _db.GetCollection<vare>(collectionNavn);
+            collection.DeleteOne(v => v.VareId == vareid);
+            return $"vare med id: {vareid} er blevet slettet";
         }
     }
 }

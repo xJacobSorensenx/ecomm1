@@ -10,6 +10,7 @@ namespace ecomm1.Repo
          Task<IEnumerable<vare>> GetAllVare();
          Task<vare> GetSpecVare(string vareId);
          string AddVare(vare vareData);
-         string UpdateVare(vare vareData);
+         Task<string> UpdateVare(string vareid, vare vareData);
+         string SletVare(string vareId);
     }
 }
